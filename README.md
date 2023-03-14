@@ -7,9 +7,9 @@
 A model merge of **3 small model** based on **Efficient Net B4**, **Efficient Net B0** and **SR CNN**  architecture using pytorch. Here, i use 2 **custom dataset**: **gender and age** dataset and **emotion** dataset .
 
 ### Workflow
-**I.** Build **model** for **Gender and Age recognition task** by a **Multi-task** model
+**I.** Build **model** for **Gender and Age recognition task** by a **Multi-task** model: [Result](https://github.com/vvduc1803/Gender-Age-Emotion-Recognition/blob/main/Gender_Age/README.md)
 
-**II.** Build **model** for **Emotion recognition task**
+**II.** Build **model** for **Emotion recognition task**: [Result](https://github.com/vvduc1803/Gender-Age-Emotion-Recognition/blob/main/Emotion/README.md)
 
 **III.** Merge them and use **Mediapipe, Opencv library** for recognition
 

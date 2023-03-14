@@ -9,7 +9,7 @@ import config
 from recognition import FaceDetector
 
 # Load video
-cap = cv2.VideoCapture('g.mp4')
+cap = cv2.VideoCapture(0)
 
 # Load model
 detector = FaceDetector()

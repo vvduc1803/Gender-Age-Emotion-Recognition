@@ -6,6 +6,7 @@ WORKDIR /save
 
 # Update ubuntu and install python
 RUN apt-get update -y
+RUN apt-get install -y libsm6 libxext6 ffmpeg libfontconfig1 libxrender1 libgl1-mesa-glx
 RUN apt-get install -y python3-pip build-essential pkg-config
 RUN pip3 install --upgrade pip
 RUN pip3 install torch

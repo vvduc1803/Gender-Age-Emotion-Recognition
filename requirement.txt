@@ -1,4 +1,4 @@
-opencv
+opencv-contrib-python
 mediapipe
 albumentations
 numpy
