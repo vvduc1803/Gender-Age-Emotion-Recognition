@@ -9,7 +9,7 @@ import config
 from recognition import FaceDetector
 
 # Load video
-cap = cv2.VideoCapture('c.mp4')
+cap = cv2.VideoCapture('g.mp4')
 
 # Load model
 detector = FaceDetector()
@@ -30,6 +30,7 @@ while cap.isOpened():
 
             # Avoid some problem like: person zoom close camera, person out camera
             try:
+
                 # Crop frame for recognition
                 face = frame[y_min-40:y_min+h, x_min-20:x_min+w+20]
 
@@ -43,14 +44,14 @@ while cap.isOpened():
 
                 # Put information into screen
                 cv2.rectangle(frame, (x_min-20, y_min-40), (x_min+w+20, y_min+h), (0, 0, 0), 2)
-                cv2.rectangle(frame, (x_min+w+20, y_min-41), (x_min+w+200, y_min+55), (0, 0, 0), -1)
+                cv2.rectangle(frame, (x_min+w+20, y_min-41), (x_min+w+300, y_min+55), (0, 0, 0), -1)
 
                 cv2.putText(frame,
                             f'Gender: {config.gender_names[int(idx_gender)]}-{gender_score*100:.0f}%',
                             (x_min+w+20, y_min-20),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 cv2.putText(frame,
-                            f'Age: {age.item() * 116 - 5:.0f}-{age.item() * 116 + 5:.0f}',
+                            f'Age: {age.item() * 100 - 5:.0f}-{age.item() * 100 + 5:.0f}',
                             (x_min+w+20, y_min+15),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 cv2.putText(frame, f'Emotion: {config.emotion_names[int(idx_emotion)]}-{emotion_score*100:.0f}%',
@@ -63,7 +64,7 @@ while cap.isOpened():
                 None
 
     # Show result
-    cv2.imshow('MediaPipe Face Detection', frame)
+    cv2.imshow('Recognition: Gender-Age-Emotion', frame)
     if cv2.waitKey(5) & 0xFF == 27:
         break
 

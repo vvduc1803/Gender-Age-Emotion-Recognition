@@ -1,5 +1,3 @@
-torch
-torchvision
 opencv
 mediapipe
 albumentations

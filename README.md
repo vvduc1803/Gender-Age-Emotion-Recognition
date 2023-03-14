@@ -76,7 +76,11 @@ docker run gender_age_emotion                                             # Run 
 
 Recognition results
 
-![Screenshot](results/Birds.png)
+![Screenshot](results/1.jpg)
+![Screenshot](results/2.jpg)
+![Screenshot](results/3.jpg)
+![Screenshot](results/4.jpg)
+
 
 ---------------------------------------------
 
