@@ -14,10 +14,10 @@ NUM_WORKER = 4
 IMAGE_SIZE = 200
 BATCH_SIZE = 64
 EPOCHS = 100
-LR = 1e-4
-WEIGHT_DECAY = 1e-2
+LR = 1e-3
+WEIGHT_DECAY = 1e-5
 PIN_MEMORY = True
-LOAD_MODEL = True
+LOAD_MODEL = False
 SAVE_MODEL = True
 CHECKPOINT_FILE = "Gender_Age.pt"
 
@@ -28,8 +28,8 @@ class_names = ['Male', 'Female']
 transform = A.Compose(
     [A.Resize(width=IMAGE_SIZE, height=IMAGE_SIZE),
      A.HorizontalFlip(p=0.5),
-     A.ColorJitter(p=0.2),
-     A.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5], max_pixel_value=255.0, ),
+     A.ToGray(True),
+     A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
      ToTensorV2(),
      ],
 )

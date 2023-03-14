@@ -61,7 +61,7 @@ def train_step(model: torch.nn.Module,
         lossgender.append(loss_gender)
         loss_age = loss_fn_age(z_pred, z)
         lossage.append(loss_age)
-        loss = 100 * loss_age + loss_gender
+        loss = loss_age + loss_gender
 
         # 3. Optimizer zero grad
         optimizer.zero_grad()
@@ -86,20 +86,20 @@ def test_step(model: torch.nn.Module,
               device: torch.device) -> Tuple[List, List, List[float]]:
     """Tests(Validation) a PyTorch model for a single epoch.
 
-    Turns a target PyTorch model to "eval" mode and then performs
+    Turns target PyTorch model to "eval" mode and then performs
     a forward pass on a validation dataset.
 
     Args:
     model: A PyTorch model to be tested.
     dataloader: A DataLoader instance for the model to be tested on.
-    loss_fn: A PyTorch loss function to calculate loss on the test data.
+    loss_fn_gender: A PyTorch loss function to calculate gender loss on the test data.
+    loss_fn_age: A PyTorch loss function to calculate age loss on the test data.
     device: A target device to compute on (e.g. "cuda" or "cpu").
 
     Returns:
-    A tuple of testing loss and testing accuracy metrics.
-    In the form (val_loss, val_accuracy). For example:
-
-    (0.0223, 0.8985)
+    A tuple of validation loss of list gender loss, list age loss and list validation accuracy metrics.
+    In the form ([val_loss_gender], [val_loss_age], [val_accuracy]). For example:
+    ([0.1112,0.5], [0.8743,0.3], [0.23, 0.54])
     """
     # Put model in eval mode
     model.eval()
@@ -137,7 +137,7 @@ def test_step(model: torch.nn.Module,
     # Adjust metrics to get average loss and accuracy per batch
     return test_loss_gender, test_loss_age, acc_
 
-def save_checkpoint(model, optimizer, filename="my_checkpoint.pt"):
+def save_checkpoint(model, optimizer, filename="Gender_Age.pt"):
     print("=> Saving checkpoint")
     checkpoint = {
         "state_dict": model.state_dict(),
@@ -154,19 +154,3 @@ def load_checkpoint(checkpoint_file, model, optimizer, lr, device):
     # Meaningful when continue train model, avoid load old checkpoint lead to many hours of debugging
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
-
-def Confusion_Matrix(classes_names, y_pred, targets):
-
-    # (Optional) to show the predict of model and true labels
-    confmat = ConfusionMatrix(num_classes=len(classes_names), task='multiclass')
-    confmat_tensor = confmat(preds=y_pred,
-                             target=targets)
-
-    # Plot confusion matrix
-    fig, ax = plot_confusion_matrix(conf_mat=confmat_tensor.numpy(),
-                                    class_names=classes_names,
-                                    figsize=(100, 100))
-
-    # Save confusion matrix
-    fig.savefig('Confusion_Matrix.png')
-

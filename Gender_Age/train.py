@@ -15,7 +15,7 @@ from model import AgeModel
 def main():
 
     # Create tensorboard file to keep track process training
-    writer = SummaryWriter(f'runs/')
+    writer = SummaryWriter(f'runss/')
     step_train = 0
     step_val = 0
 
@@ -75,8 +75,9 @@ def main():
               f' Validation Accuracy: {val_acc * 100:.2f}%')
 
         # Sve model each 5 epochs
-        if (epoch + 1) % 5 == 0 & config.SAVE_MODEL:
-            save_checkpoint(model, optimizer)
+        a = int(input())
+        if a == 1 & config.SAVE_MODEL:
+            save_checkpoint(model, optimizer, config.CHECKPOINT_FILE)
         print('--------------------------------------------------------------------')
 
 if __name__ == '__main__':
