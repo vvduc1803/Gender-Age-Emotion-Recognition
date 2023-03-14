@@ -77,7 +77,7 @@ class FaceDetector:
         gender_score, age = age_model(image)
         gender_score = torch.sigmoid(gender_score)
         gender = 1 if gender_score > 0.5 else 0
-        gender_score = (1-gender_score) if gender_score < 0.5 else (gender_score-0.5)/0.5
+        gender_score = (0.5-gender_score)/0.5 if gender_score < 0.5 else (gender_score-0.5)/0.5
 
         # Apply transform
         image = config.emotion_transfrom(image)
